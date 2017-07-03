@@ -8,4 +8,7 @@
     <string name="roboto_thin">sans-serif-thin</string>
     <string name="roboto_medium">sans-serif-medium</string>
 
+    <string name="loading">Please wait, transactions loading...</string>
+    <string name="error">Error</string>
+<string name="error_button">OK</string>
 </resources>

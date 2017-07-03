@@ -5,4 +5,5 @@ package pro.games_box.a4pay.presentation.application;
  */
 
 public class Config {
+    public static final String API_BASE_URL = "https://test.4pay.com";
 }

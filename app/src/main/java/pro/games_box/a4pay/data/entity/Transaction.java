@@ -5,4 +5,10 @@ package pro.games_box.a4pay.data.entity;
  */
 
 public class Transaction {
+
+    public String transactionId;
+    public String amount;
+    public String debit;
+    public String credit;
+    public String date;
 }
