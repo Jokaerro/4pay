@@ -22,4 +22,6 @@ public interface MainView {
     void hideProgressDialog();
 
     void errorHandling(String message);
+
+    void errorToast(String message);
 }

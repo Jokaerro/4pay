@@ -10,5 +10,9 @@
 
     <string name="loading">Please wait, transactions loading...</string>
     <string name="error">Error</string>
-<string name="error_button">OK</string>
+    <string name="error_button">OK</string>
+
+    <string name="error_user_id">Please input email</string>
+    <string name="error_date_from">Please input date from</string>
+    <string name="error_date_to">Please input date to</string>
 </resources>

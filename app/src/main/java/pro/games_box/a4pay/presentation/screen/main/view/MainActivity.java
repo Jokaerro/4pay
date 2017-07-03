@@ -1,5 +1,6 @@
 package pro.games_box.a4pay.presentation.screen.main.view;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
@@ -9,10 +10,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -29,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private ProgressDialog mProgressDialog;
     private RecyclerAdapter mAdapter;
 
+    private final Calendar dateFrom = Calendar.getInstance();
 
     @BindView(R.id.transactions)
     RecyclerView mRecycler;
@@ -38,6 +46,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @BindView(R.id.reset)
     FloatingActionButton mReset;
+
+    @BindView(R.id.login_email_et)
+    EditText mEmail;
+
+    @BindView(R.id.login_date_from_et)
+    EditText mDateFrom;
+
+    @BindView(R.id.login_date_to_et)
+    EditText mDateTo;
 
     @Inject
     MainPresenter mPresenter;
@@ -54,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
         initListView();
 
         mPresenter.setView(this);
+
+        mDateFrom.setFocusable(false);
+        mDateFrom.setFocusableInTouchMode(false);
+
+        mDateTo.setFocusable(false);
+        mDateTo.setFocusableInTouchMode(false);
     }
 
     private void initListView() {
@@ -67,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @OnClick(R.id.enter_btn)
     void getTransactions(){
-        mPresenter.updateHistory("1234", "16.07.17 14:40", "21.07.17 14:40");
+        mPresenter.updateHistory(mEmail.getText().toString(), mDateFrom.getText().toString(), mDateTo.getText().toString());
     }
 
     @OnClick(R.id.reset)
@@ -75,6 +98,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
         mAuth.setVisibility(View.VISIBLE);
         mRecycler.setVisibility(View.GONE);
         mReset.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.login_date_from_et)
+    void getDateFrom(){
+        getCalendar("from");
+    }
+
+    @OnClick(R.id.login_date_to_et)
+    void getDateTo(){
+        getCalendar("to");
     }
 
     @Override
@@ -122,6 +155,45 @@ public class MainActivity extends AppCompatActivity implements MainView {
         dialog.show();
 
         testRecycler();
+    }
+
+    @Override
+    public void errorToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void getCalendar(final String whoseDate){
+        DatePickerDialog dialog;
+        Calendar time = Calendar.getInstance();
+        dialog = new DatePickerDialog(MainActivity.this,
+                android.app.AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                dateFrom.set(Calendar.YEAR, year);
+                dateFrom.set(Calendar.MONTH, monthOfYear);
+                dateFrom.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateDate(dateFrom, whoseDate);
+            }
+        },time.get(Calendar.YEAR ), time.get(Calendar.MONTH), time.get(Calendar.DAY_OF_MONTH));
+
+        dialog.show();
+    }
+
+    private void updateDate(Calendar date, String whoseDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.US);
+        if (date == null) {
+            if(whoseDate.equals("from")) {
+                mDateFrom.setText("");
+            } else {
+                mDateTo.setText("");
+            }
+        } else {
+            if(whoseDate.equals("from")) {
+                mDateFrom.setText(sdf.format(date.getTime()));
+            } else {
+                mDateTo.setText(sdf.format(date.getTime()));
+            }
+        }
     }
 
     private void testRecycler(){

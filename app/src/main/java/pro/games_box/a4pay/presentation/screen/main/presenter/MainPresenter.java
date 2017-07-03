@@ -29,9 +29,11 @@ public class MainPresenter extends BasePresenter<MainView> {
         App.getAppComponent().injectMainPresenter(this);
     }
 
-    public void updateHistory(String userId, String dateFrom, String DateTo){
+    public void updateHistory(String userId, String dateFrom, String dateTo){
+        if(!checkFields(userId, dateFrom, dateTo))
+            return;
         mView.showProgressDialog();
-        mDataSource.getHistory(userId, dateFrom, DateTo)
+        mDataSource.getHistory(userId, dateFrom, dateTo)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
 
@@ -55,9 +57,31 @@ public class MainPresenter extends BasePresenter<MainView> {
                         });
     }
 
+    private boolean checkFields(String userId, String dateFrom, String dateTo){
+        if(userId.isEmpty()){
+            processInputError("Please input email");
+            return false;
+
+        } else if(dateFrom.isEmpty()) {
+            processInputError("Please input date from");
+            return false;
+
+        } else if(dateTo.isEmpty()) {
+            processInputError("Please input date to");
+            return false;
+
+        }
+
+        return true;
+    }
+
     private void processTransactions(List<Transaction> transactions) {
         mView.updateListView(transactions);
         mView.hideProgressDialog();
+    }
+
+    private void processInputError(String message){
+        mView.errorToast(message);
     }
 
     private void processError(String message){
