@@ -38,7 +38,7 @@ public class RestApiCreator {
     private static GsonConverterFactory buildGsonConverterFactory() {
         GsonBuilder gsonBuilder = new GsonBuilder();
 
-        Gson gson = gsonBuilder.create();
+        Gson gson = gsonBuilder.setLenient().create();
 
         return GsonConverterFactory.create(gson);
     }

@@ -35,6 +35,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public void swapData(List<Transaction> data){
         if (data != null) {
+            for (int i = 0; i < data.size(); i++)
+                if (data.get(i) == null)
+                    data.remove(i);
             mData.clear();
             mData.addAll(data);
             notifyDataSetChanged();
@@ -49,11 +52,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.date.setText(mData.get(position).date);
-        holder.amount.setText(mData.get(position).amount);
-        holder.debit.setText(mData.get(position).debit);
-        holder.credit.setText(mData.get(position).credit);
-        holder.transactionId.setText(mData.get(position).transactionId);
+        if(mData.get(position) != null) {
+            holder.date.setText(mData.get(position).date);
+            holder.amount.setText(mData.get(position).amount);
+            holder.debit.setText(mData.get(position).debit);
+            holder.credit.setText(mData.get(position).credit);
+            holder.transactionId.setText(mData.get(position).transactionId);
+        }
     }
 
     @Override

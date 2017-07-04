@@ -27,7 +27,6 @@
                     android:layout_weight="1"
                     android:textSize="18sp"
                     android:fontFamily="@string/roboto_regular"
-                    android:text="16.07.2017 14:40:00"
                     />
                 <TextView
                     android:id="@+id/amount"
@@ -37,7 +36,6 @@
                     android:gravity="right"
                     android:textSize="18sp"
                     android:fontFamily="@string/roboto_black"
-                    android:text="124.43"
                     />
 
             </LinearLayout>
@@ -57,7 +55,6 @@
                     android:layout_weight="1"
                     android:textSize="16sp"
                     android:fontFamily="@string/roboto_regular"
-                    android:text="+7985123154"
                     />
                 <TextView
                     android:id="@+id/credit"
@@ -67,7 +64,6 @@
                     android:gravity="right"
                     android:textSize="16sp"
                     android:fontFamily="@string/roboto_regular"
-                    android:text="+7946123123"
                     />
 
             </LinearLayout>
@@ -77,7 +73,6 @@
                 android:id="@+id/transaction_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12341245"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
