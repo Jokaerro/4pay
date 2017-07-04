@@ -12,6 +12,11 @@
     <string name="error">Error</string>
     <string name="error_button">OK</string>
 
+    <string name="hint_userid">Input userid</string>
+    <string name="hint_date_from">Input Date From</string>
+    <string name="hint_date_to">Input Date to</string>
+    <string name="enter_button">Enter</string>
+
     <string name="error_user_id">Please input email</string>
     <string name="error_date_from">Please input date from</string>
     <string name="error_date_to">Please input date to</string>
