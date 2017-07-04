@@ -3,7 +3,7 @@
     package="pro.games_box.a4pay"
     >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".presentation.application.App"
@@ -20,6 +20,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".presentation.screen.transactions.view.TransactionsActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.screen.main.view.MainActivity" />
         </activity>
     </application>
 
